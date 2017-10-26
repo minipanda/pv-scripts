@@ -258,11 +258,11 @@ if [ ! -z "$2" ]; then
 	fi
 elif [ "$target" == "malta" -o "$target" == "vexpress-a9" -o "$target" == "legacy" -o "$target" == "mt300a" ]; then
 	echo "Building $target target"
+	setup_kernel_atom
+	setup_uboot
 	if [ ! -f ${TOP_DIR}/out/$target/build-host/qemu/qemu.done ]; then
 		${ALCHEMY_HOME}/scripts/alchemake host.qemu
 	fi
-	setup_kernel_atom
-	setup_uboot
 	${ALCHEMY_HOME}/scripts/alchemake all
 	${ALCHEMY_HOME}/scripts/alchemake final
 	${ALCHEMY_HOME}/scripts/alchemake image
