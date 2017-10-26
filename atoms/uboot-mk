@@ -1,0 +1,9 @@
+
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := uboot
+LOCAL_CATEGORY_PATH := system
+
+include $(BUILD_UBOOT)
