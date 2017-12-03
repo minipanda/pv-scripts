@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo PATH: $PATH
+
 set -e
 
 TARGET=$1

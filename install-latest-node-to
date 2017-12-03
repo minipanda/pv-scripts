@@ -1,0 +1,15 @@
+#!/bin/sh
+
+todir=$1
+
+if test -z "$todir"; then
+  $todir=$PWD
+fi
+
+node=`curl https://nodejs.org/dist/latest-v6.x/SHASUMS256.txt | grep node.*linux.*x64.tar.gz | awk '{ print  $2 }'`
+
+mkdir -p $todir/node-6.x/
+
+curl https://nodejs.org/dist/latest-v6.x/$node | tar xz -C $todir/node-6.x/ --strip-components 1
+
+ln -s $todir/node-6.x $todir/node

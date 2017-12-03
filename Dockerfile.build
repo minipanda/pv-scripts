@@ -1,13 +1,5 @@
-FROM ubuntu:16.04
+FROM pantavisor/pv-build
 
-COPY install-latest-node-to /
 COPY passwd.snippet /tmp/passwd
 COPY userid /tmp/userid
 RUN cat /tmp/passwd >> /etc/passwd
-
-RUN apt-get update && apt-get install -y curl build-essential bc libpixman-1-dev libglib2.0-dev mtd-utils device-tree-compiler u-boot-tools lsb-release git-core python-pip parted dosfstools libncurses5-dev mtools texinfo squashfs-tools python3 vim-tiny libtool automake kmod bison && apt-get clean
-RUN /install-latest-node-to /opt/
-ENV PATH=/opt/node-4.x/bin/:${PATH}
-RUN npm install -g json
-RUN pip install httpie
-
