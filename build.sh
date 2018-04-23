@@ -207,6 +207,16 @@ mips-mt300a)
 mipsel)
 	target="mipsel"
 	;;
+mips-generic)
+	target="mips-generic"
+	kernel=""
+	uboot=""
+	;;
+arm-generic)
+	target="arm-generic"
+	kernel=""
+	uboot=""
+	;;
 arm-rpi2-mmc)
 	target="rpi2"
 	setup_alchemy
@@ -235,7 +245,7 @@ arm64-hikey)
 	kernel="hikey"
 	;;
 *)
-	echo "Must define target product as first argument [arm-qemu, malta-qemu, arm-rpi3, arm-rpi2]"
+	echo "Must define target product as first argument [arm-qemu, malta-qemu, arm-generic, mips-generic, arm-rpi3, arm-rpi2]"
 	exit 1
 	;;
 esac
@@ -272,6 +282,16 @@ elif [ "$target" == "malta" -o "$target" == "vexpress-a9" -o "$target" == "legac
 	${ALCHEMY_HOME}/scripts/alchemake ubitrail
 	${ALCHEMY_HOME}/scripts/alchemake pflash
 elif [ "$target" == "mipsel" ]; then
+	${ALCHEMY_HOME}/scripts/alchemake all
+	${ALCHEMY_HOME}/scripts/alchemake final
+	${ALCHEMY_HOME}/scripts/alchemake image
+	${ALCHEMY_HOME}/scripts/alchemake trail
+elif [ "$target" == "arm-generic" ]; then
+	${ALCHEMY_HOME}/scripts/alchemake all
+	${ALCHEMY_HOME}/scripts/alchemake final
+	${ALCHEMY_HOME}/scripts/alchemake image
+	${ALCHEMY_HOME}/scripts/alchemake trail
+elif [ "$target" == "mips-generic" ]; then
 	${ALCHEMY_HOME}/scripts/alchemake all
 	${ALCHEMY_HOME}/scripts/alchemake final
 	${ALCHEMY_HOME}/scripts/alchemake image
