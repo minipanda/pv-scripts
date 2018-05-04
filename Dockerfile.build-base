@@ -2,11 +2,12 @@ FROM debian:stretch
 
 COPY install-latest-node-to /
 
-RUN apt-get update && apt-get install -y curl build-essential bc libpixman-1-dev libglib2.0-dev mtd-utils device-tree-compiler u-boot-tools lsb-release git-core python-pip parted dosfstools libncurses5-dev mtools texinfo squashfs-tools python3 vim-tiny libtool automake kmod bison flex && apt-get clean
+RUN apt-get update && apt-get install -y locales curl build-essential bc libpixman-1-dev libglib2.0-dev mtd-utils device-tree-compiler u-boot-tools lsb-release git-core python-pip parted dosfstools libncurses5-dev mtools texinfo squashfs-tools python3 vim-tiny libtool automake kmod bison flex && apt-get clean
 RUN /install-latest-node-to /opt/
 ENV PATH=/opt/node/bin/:${PATH}
 RUN npm install -g json
 RUN pip install httpie
+RUN localedef -i en_US -f UTF-8 en_US.UTF-8
 
 WORKDIR /pwd
 
