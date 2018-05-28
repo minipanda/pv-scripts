@@ -4,6 +4,8 @@ echo PATH: $PATH
 
 set -e
 
+export PANTAVISOR_VERSION="003"
+
 TARGET=$1
 
 TOP_DIR=$(cd $(dirname $0) && pwd -P)
