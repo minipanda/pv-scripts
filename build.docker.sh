@@ -24,10 +24,15 @@ if [ -d "$PVR_MERGE_SRC" ]; then
 	pvr_merge_src_abs=`sh -c "cd $PVR_MERGE_SRC; pwd"`
 fi
 
+pvr_merge_opts=
+if [ ! -z $pvr_merge_src_abs ]; then
+	pvr_merge_opts=-v$pvr_merge_src_abs:$pvr_merge_src_abs
+fi
+
 docker run \
 	-e MAKEFLAGS=$MAKEFLAGS \
 	-v$PWD:$PWD \
-	-v$pvr_merge_src_abs:$pvr_merge_src_abs \
+	$pvr_merge_opts \
 	-w$PWD \
 	--user `id -u` \
 	--env-file=<(env | grep -v PATH | grep -v LD_LIBR | grep -v PKG_ | grep -v PYTHON) \
