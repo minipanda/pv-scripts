@@ -246,6 +246,11 @@ arm64-hikey)
 	target="hikey"
 	kernel="hikey"
 	;;
+arm64-bubblegum)
+        target="bubblegum"
+        kerenl="bubblegum"
+        uboot="bubblegum"
+        ;;
 *)
 	echo "Must define target product as first argument [arm-qemu, malta-qemu, arm-generic, mips-generic, arm-rpi3, arm-rpi2]"
 	exit 1
@@ -325,6 +330,16 @@ elif [ "$target" == "hikey" ]; then
 	${ALCHEMY_HOME}/scripts/alchemake image
 	${ALCHEMY_HOME}/scripts/alchemake trail
 
+	build_mmc_tools
+	build_mmc_image
+elif [ "$target" == "bubblegum" ]; then
+	setup_kernel_atom
+	setup_uboot
+	${ALCHEMY_HOME}/scripts/alchemake all
+	${ALCHEMY_HOME}/scripts/alchemake final
+	${ALCHEMY_HOME}/scripts/alchemake image
+	${ALCHEMY_HOME}/scripts/alchemake trail
+ 
 	build_mmc_tools
 	build_mmc_image
 fi
